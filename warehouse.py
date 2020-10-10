@@ -121,6 +121,58 @@ def delete_item():
         print("*Error, invalid Id. Try again.")
 
 
+def update_item_stock():
+    display_catalog()
+    id = input("Please choose an id: ")
+    found = False
+    for item in catalog:
+        if(str(item.id)== id):
+            found = True
+            stock = int(input('Provide new stock amount ')) # always check data types
+            item.stock = stock
+
+    if(not found):
+        print("*Error, invalid Id. Try again.")
+
+def display_category():
+    print_header("These are your categories")
+    temp = []
+    for item in catalog:
+        if(not item.category in temp):
+            temp.append(item.category)
+            print(item.category)
+
+def cheap_products():
+    print_header("This is your cheapest product")
+    cheapest = catalog[0]
+    for item in catalog:
+        if(item.price < cheapest.price):
+            cheapest = item
+
+    print_item(cheapest)
+        
+def expensive_products():
+    print_header("The 3 most expensive products")
+    prices = []
+    for item in catalog:
+        prices.append(item.price)
+
+    prices.sort(reverse=True)
+    
+    for item in catalog:
+        if(item.price == prices[0]):
+            print_item(item)
+    
+    for item in catalog:
+        if(item.price == prices[1]):
+            print_item(item)
+
+    for item in catalog:
+        if(item.price == prices[2]):
+            print_item(item)  
+
+    
+
 
 # instructions
 deserialze_catalog()
@@ -159,6 +211,19 @@ while(opc != 'x'):
 
     elif(opc == '6'):
         delete_item()
+
+    elif(opc == '7'):
+        update_item_stock()
+        serialize_catalog()
+
+    elif(opc == '8'):
+        display_category()
+
+    elif(opc == '9'):
+        cheap_products()
+
+    elif(opc == '10'):
+        expensive_products()
 
     input('Press Enter to continue...')
 
