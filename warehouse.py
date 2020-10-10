@@ -158,7 +158,7 @@ def expensive_products():
         prices.append(item.price)
 
     prices.sort(reverse=True)
-    
+
     for item in catalog:
         if(item.price == prices[0]):
             print_item(item)
@@ -226,14 +226,3 @@ while(opc != 'x'):
         expensive_products()
 
     input('Press Enter to continue...')
-
-
-"""
-opc 5
--show catalog
--ask the user to choose and id
--find the id in the catalog
--   ask for the new price
--   set the price
--else, show an error
-"""
